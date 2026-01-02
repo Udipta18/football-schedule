@@ -1,0 +1,131 @@
+{
+    "timezone": "IST",
+    "month": "January",
+    "year": 2026,
+    "leagues": [
+        "Premier League",
+        "La Liga"
+    ],
+    "matches": [
+        {
+            "id": "PL-2026-01-01-LIV-LEE",
+            "league": "Premier League",
+            "date": "2026-01-01",
+            "time": "23:00",
+            "home": "Liverpool",
+            "away": "Leeds United",
+            "venue": "Anfield, Liverpool",
+            "status": "confirmed"
+        },
+        {
+            "id": "PL-2026-01-02-BRE-TOT",
+            "league": "Premier League",
+            "date": "2026-01-02",
+            "time": "01:30",
+            "home": "Brentford",
+            "away": "Tottenham Hotspur",
+            "venue": "Gtech Community Stadium, Brentford",
+            "status": "confirmed"
+        },
+        {
+            "id": "PL-2026-01-02-SUN-MCI",
+            "league": "Premier League",
+            "date": "2026-01-02",
+            "time": "01:30",
+            "home": "Sunderland",
+            "away": "Manchester City",
+            "venue": "Stadium of Light, Sunderland",
+            "status": "confirmed"
+        },
+        {
+            "id": "PL-2026-01-03-LEE-MUN",
+            "league": "Premier League",
+            "date": "2026-01-03",
+            "time": "18:00",
+            "home": "Leeds United",
+            "away": "Manchester United",
+            "venue": "Elland Road, Leeds",
+            "status": "confirmed"
+        },
+        {
+            "id": "PL-2026-01-03-BOU-ARS",
+            "league": "Premier League",
+            "date": "2026-01-03",
+            "time": "23:00",
+            "home": "Bournemouth",
+            "away": "Arsenal",
+            "venue": "Vitality Stadium, Bournemouth",
+            "status": "confirmed"
+        },
+        {
+            "id": "PL-2026-01-03-MCI-CHE",
+            "league": "Premier League",
+            "date": "2026-01-03",
+            "time": "23:00",
+            "home": "Manchester City",
+            "away": "Chelsea",
+            "venue": "Etihad Stadium, Manchester",
+            "status": "confirmed"
+        },
+        {
+            "id": "PL-2026-01-03-FUL-LIV",
+            "league": "Premier League",
+            "date": "2026-01-03",
+            "time": "20:30",
+            "home": "Fulham",
+            "away": "Liverpool",
+            "venue": "Craven Cottage, London",
+            "status": "confirmed"
+        },
+        {
+            "id": "PL-2026-01-03-TOT-SUN",
+            "league": "Premier League",
+            "date": "2026-01-03",
+            "time": "20:30",
+            "home": "Tottenham Hotspur",
+            "away": "Sunderland",
+            "venue": "Tottenham Hotspur Stadium, London",
+            "status": "confirmed"
+        },
+        {
+            "id": "LL-2026-01-04-RMA-BET",
+            "league": "La Liga",
+            "date": "2026-01-04",
+            "time": "19:45",
+            "home": "Real Madrid",
+            "away": "Real Betis",
+            "venue": "Santiago Bernabéu, Madrid",
+            "status": "confirmed"
+        },
+        {
+            "id": "LL-2026-01-11-RSO-ATM",
+            "league": "La Liga",
+            "date": "2026-01-11",
+            "time": "21:30",
+            "home": "Real Sociedad",
+            "away": "Atletico Madrid",
+            "venue": "Reale Arena, San Sebastián",
+            "status": "to_be_confirmed"
+        },
+        {
+            "id": "LL-2026-01-18-RMA-LEV",
+            "league": "La Liga",
+            "date": "2026-01-18",
+            "time": "21:30",
+            "home": "Real Madrid",
+            "away": "Levante",
+            "venue": "Santiago Bernabéu, Madrid",
+            "status": "confirmed"
+        },
+        {
+            "id": "LL-2026-01-25-VIL-RMA",
+            "league": "La Liga",
+            "date": "2026-01-26",
+            "time": "00:30",
+            "home": "Villarreal",
+            "away": "Real Madrid",
+            "venue": "Estadio de la Cerámica, Villarreal",
+            "status": "confirmed"
+        }
+    ]
+}

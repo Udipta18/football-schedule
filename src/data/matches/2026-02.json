@@ -1,0 +1,137 @@
+{
+    "timezone": "IST",
+    "month": "February",
+    "year": 2026,
+    "matches": [
+        {
+            "id": "PL-2026-02-01-CHE-TOT",
+            "date": "2026-02-01",
+            "time": "22:30",
+            "league": "Premier League",
+            "home": "Chelsea",
+            "away": "Tottenham Hotspur",
+            "venue": "Stamford Bridge, London",
+            "status": "scheduled"
+        },
+        {
+            "id": "PL-2026-02-08-ARS-MCI",
+            "date": "2026-02-08",
+            "time": "22:30",
+            "league": "Premier League",
+            "home": "Arsenal",
+            "away": "Manchester City",
+            "venue": "Emirates Stadium, London",
+            "status": "scheduled"
+        },
+        {
+            "id": "PL-2026-02-15-LIV-MUN",
+            "date": "2026-02-15",
+            "time": "22:30",
+            "league": "Premier League",
+            "home": "Liverpool",
+            "away": "Manchester United",
+            "venue": "Anfield, Liverpool",
+            "status": "scheduled"
+        },
+        {
+            "id": "PL-2026-02-22-TOT-ARS",
+            "date": "2026-02-22",
+            "time": "22:30",
+            "league": "Premier League",
+            "home": "Tottenham Hotspur",
+            "away": "Arsenal",
+            "venue": "Tottenham Hotspur Stadium, London",
+            "status": "scheduled"
+        },
+        {
+            "id": "LL-2026-02-02-RMA-ATM",
+            "date": "2026-02-02",
+            "time": "01:30",
+            "league": "La Liga",
+            "home": "Real Madrid",
+            "away": "Atletico Madrid",
+            "venue": "Santiago Bernabéu, Madrid",
+            "status": "scheduled"
+        },
+        {
+            "id": "LL-2026-02-09-BAR-RMA",
+            "date": "2026-02-09",
+            "time": "01:30",
+            "league": "La Liga",
+            "home": "Barcelona",
+            "away": "Real Madrid",
+            "venue": "Spotify Camp Nou, Barcelona",
+            "status": "scheduled"
+        },
+        {
+            "id": "LL-2026-02-23-ATM-BAR",
+            "date": "2026-02-23",
+            "time": "01:30",
+            "league": "La Liga",
+            "home": "Atletico Madrid",
+            "away": "Barcelona",
+            "venue": "Metropolitano Stadium, Madrid",
+            "status": "scheduled"
+        },
+        {
+            "id": "SA-2026-02-07-JUV-INT",
+            "date": "2026-02-08",
+            "time": "01:15",
+            "league": "Serie A",
+            "home": "Juventus",
+            "away": "Inter Milan",
+            "venue": "Allianz Stadium, Turin",
+            "status": "scheduled"
+        },
+        {
+            "id": "SA-2026-02-14-NAP-MIL",
+            "date": "2026-02-15",
+            "time": "01:15",
+            "league": "Serie A",
+            "home": "Napoli",
+            "away": "AC Milan",
+            "venue": "Stadio Diego Armando Maradona, Naples",
+            "status": "scheduled"
+        },
+        {
+            "id": "SA-2026-02-21-INT-MIL",
+            "date": "2026-02-22",
+            "time": "01:15",
+            "league": "Serie A",
+            "home": "Inter Milan",
+            "away": "AC Milan",
+            "venue": "San Siro, Milan",
+            "status": "scheduled"
+        },
+        {
+            "id": "SPL-2026-02-05-HIL-ITT",
+            "date": "2026-02-05",
+            "time": "23:00",
+            "league": "Saudi Pro League",
+            "home": "Al Hilal",
+            "away": "Al Ittihad",
+            "venue": "King Fahd Stadium, Riyadh",
+            "status": "scheduled"
+        },
+        {
+            "id": "SPL-2026-02-12-NAS-AHL",
+            "date": "2026-02-12",
+            "time": "23:00",
+            "league": "Saudi Pro League",
+            "home": "Al Nassr",
+            "away": "Al Ahli",
+            "venue": "Al-Awwal Park, Riyadh",
+            "status": "scheduled"
+        },
+        {
+            "id": "SPL-2026-02-26-ITT-HIL",
+            "date": "2026-02-26",
+            "time": "23:00",
+            "league": "Saudi Pro League",
+            "home": "Al Ittihad",
+            "away": "Al Hilal",
+            "venue": "King Abdullah Sports City, Jeddah",
+            "status": "scheduled"
+        }
+    ]
+}

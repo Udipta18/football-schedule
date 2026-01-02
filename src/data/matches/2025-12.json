@@ -1,0 +1,157 @@
+{
+    "timezone": "IST",
+    "month": "December",
+    "year": 2025,
+    "matches": [
+        {
+            "id": "PL-2025-12-07-MCI-LIV",
+            "date": "2025-12-07",
+            "time": "23:00",
+            "league": "Premier League",
+            "home": "Manchester City",
+            "away": "Liverpool",
+            "venue": "Etihad Stadium, Manchester",
+            "status": "scheduled"
+        },
+        {
+            "id": "PL-2025-12-14-ARS-MUN",
+            "date": "2025-12-14",
+            "time": "20:30",
+            "league": "Premier League",
+            "home": "Arsenal",
+            "away": "Manchester United",
+            "venue": "Emirates Stadium, London",
+            "status": "scheduled"
+        },
+        {
+            "id": "PL-2025-12-21-CHE-TOT",
+            "date": "2025-12-21",
+            "time": "18:00",
+            "league": "Premier League",
+            "home": "Chelsea",
+            "away": "Tottenham",
+            "venue": "Stamford Bridge, London",
+            "status": "scheduled"
+        },
+        {
+            "id": "PL-2025-12-26-LIV-ARS",
+            "date": "2025-12-26",
+            "time": "23:00",
+            "league": "Premier League",
+            "home": "Liverpool",
+            "away": "Arsenal",
+            "venue": "Anfield, Liverpool",
+            "status": "scheduled"
+        },
+        {
+            "id": "PL-2025-12-28-MUN-CHE",
+            "date": "2025-12-28",
+            "time": "20:30",
+            "league": "Premier League",
+            "home": "Manchester United",
+            "away": "Chelsea",
+            "venue": "Old Trafford, Manchester",
+            "status": "scheduled"
+        },
+        {
+            "id": "LL-2025-12-07-BAR-RMA",
+            "date": "2025-12-08",
+            "time": "01:30",
+            "league": "La Liga",
+            "home": "Barcelona",
+            "away": "Real Madrid",
+            "venue": "Camp Nou, Barcelona",
+            "status": "scheduled"
+        },
+        {
+            "id": "LL-2025-12-14-ATM-SEV",
+            "date": "2025-12-14",
+            "time": "23:30",
+            "league": "La Liga",
+            "home": "Atletico Madrid",
+            "away": "Sevilla",
+            "venue": "Wanda Metropolitano, Madrid",
+            "status": "scheduled"
+        },
+        {
+            "id": "LL-2025-12-21-RMA-VIL",
+            "date": "2025-12-21",
+            "time": "23:30",
+            "league": "La Liga",
+            "home": "Real Madrid",
+            "away": "Villarreal",
+            "venue": "Santiago Bernabéu, Madrid",
+            "status": "scheduled"
+        },
+        {
+            "id": "SA-2025-12-08-MIL-JUV",
+            "date": "2025-12-09",
+            "time": "01:15",
+            "league": "Serie A",
+            "home": "AC Milan",
+            "away": "Juventus",
+            "venue": "San Siro, Milan",
+            "status": "scheduled"
+        },
+        {
+            "id": "SA-2025-12-15-NAP-ROM",
+            "date": "2025-12-16",
+            "time": "01:15",
+            "league": "Serie A",
+            "home": "Napoli",
+            "away": "AS Roma",
+            "venue": "Diego Armando Maradona Stadium, Naples",
+            "status": "scheduled"
+        },
+        {
+            "id": "SA-2025-12-22-INT-MIL",
+            "date": "2025-12-23",
+            "time": "01:15",
+            "league": "Serie A",
+            "home": "Inter Milan",
+            "away": "AC Milan",
+            "venue": "San Siro, Milan",
+            "status": "scheduled"
+        },
+        {
+            "id": "CWC-2025-12-15-RMA-PAC",
+            "date": "2025-12-15",
+            "time": "04:30",
+            "league": "FIFA Club World Cup",
+            "home": "Real Madrid",
+            "away": "Pachuca",
+            "venue": "Lusail Stadium, Qatar",
+            "status": "scheduled"
+        },
+        {
+            "id": "CWC-2025-12-18-FINAL",
+            "date": "2025-12-18",
+            "time": "00:30",
+            "league": "FIFA Club World Cup",
+            "home": "TBD",
+            "away": "TBD",
+            "venue": "Lusail Stadium, Qatar",
+            "status": "scheduled"
+        },
+        {
+            "id": "SPL-2025-12-05-NAS-AHL",
+            "date": "2025-12-06",
+            "time": "00:00",
+            "league": "Saudi Pro League",
+            "home": "Al Nassr",
+            "away": "Al Ahli",
+            "venue": "Al-Awwal Park, Riyadh",
+            "status": "scheduled"
+        },
+        {
+            "id": "SPL-2025-12-19-HIL-ITT",
+            "date": "2025-12-20",
+            "time": "00:00",
+            "league": "Saudi Pro League",
+            "home": "Al Hilal",
+            "away": "Al Ittihad",
+            "venue": "King Fahd Stadium, Riyadh",
+            "status": "scheduled"
+        }
+    ]
+}
