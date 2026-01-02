@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { months, availableYears } from '../data/constants';
+import { useTheme } from '../context/ThemeContext';
 
 const MonthSelector = ({
     selectedYear,
@@ -7,6 +8,8 @@ const MonthSelector = ({
     selectedMonth,
     setSelectedMonth
 }) => {
+    const { isLightTheme } = useTheme();
+
     const goToPreviousMonth = () => {
         if (selectedMonth === 0) {
             if (selectedYear > availableYears[0]) {
@@ -37,10 +40,10 @@ const MonthSelector = ({
 
     return (
         <div className="flex flex-wrap gap-4 mb-8 items-center justify-center">
-            <div className="flex items-center gap-4 glass rounded-xl p-2">
+            <div className={`flex items-center gap-4 glass rounded-xl p-2 ${isLightTheme ? 'border border-slate-300 shadow-sm' : ''}`}>
                 <button
                     onClick={goToPreviousMonth}
-                    className="p-2 rounded-lg hover:bg-white/10 transition-colors text-slate-300 hover:text-white"
+                    className={`p-2 rounded-lg hover:bg-white/10 transition-colors ${isLightTheme ? 'text-slate-600 hover:text-slate-900' : 'text-slate-300 hover:text-white'}`}
                     aria-label="Previous month"
                 >
                     <ChevronLeft size={24} />
@@ -50,11 +53,11 @@ const MonthSelector = ({
                         id="month-select"
                         value={selectedMonth}
                         onChange={(e) => setSelectedMonth(Number(e.target.value))}
-                        className="bg-transparent text-white font-semibold text-lg border-none focus:ring-0 cursor-pointer appearance-none pr-6 hover:text-blue-400 transition-colors"
+                        className={`bg-transparent font-semibold text-lg border-none focus:ring-0 cursor-pointer appearance-none pr-6 transition-colors ${isLightTheme ? 'text-slate-800 hover:text-blue-600' : 'text-white hover:text-blue-400'}`}
                         style={{ backgroundImage: 'none' }}
                     >
                         {months.map((month, index) => (
-                            <option key={index} value={index} className="bg-slate-800 text-white">
+                            <option key={index} value={index} className={isLightTheme ? "bg-white text-slate-900" : "bg-slate-800 text-white"}>
                                 {month}
                             </option>
                         ))}
@@ -63,11 +66,11 @@ const MonthSelector = ({
                         id="year-select"
                         value={selectedYear}
                         onChange={(e) => setSelectedYear(Number(e.target.value))}
-                        className="bg-transparent text-white font-semibold text-lg border-none focus:ring-0 cursor-pointer appearance-none hover:text-blue-400 transition-colors"
+                        className={`bg-transparent font-semibold text-lg border-none focus:ring-0 cursor-pointer appearance-none transition-colors ${isLightTheme ? 'text-slate-800 hover:text-blue-600' : 'text-white hover:text-blue-400'}`}
                         style={{ backgroundImage: 'none' }}
                     >
                         {availableYears.map(year => (
-                            <option key={year} value={year} className="bg-slate-800 text-white">
+                            <option key={year} value={year} className={isLightTheme ? "bg-white text-slate-900" : "bg-slate-800 text-white"}>
                                 {year}
                             </option>
                         ))}

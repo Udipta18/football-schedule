@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { loadMatchesForMonth } from '../utils/matchUtils';
 import { hasMatchData } from '../data/matches';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import Header from './Header';
 import MonthSelector from './MonthSelector';
 import CalendarGrid from './CalendarGrid';
@@ -9,8 +10,21 @@ import MatchPopup from './MatchPopup';
 import Footer from './Footer';
 import AuthModal from './AuthModal';
 
+/**
+ * FootballCalendar Component
+ * The main application container that holds all components together.
+ * 
+ * Logic Highlights:
+ * 1. Data Loading: Automatically fetches matches when Month or Year changes.
+ * 2. Interaction: Manages the Modal/Popup states (selected date, auth visibility).
+ * 3. Mobile Optimization: Disables page scrolling (body: overflow-hidden) when a popup is open.
+ */
 const FootballCalendar = () => {
+    // Hooks: Provide global state and theme
     const { showAuthModal, closeAuthModal } = useAuth();
+    const { isLightTheme } = useTheme();
+
+    // State: Calendar navigation and view control
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
     const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
     const [matches, setMatches] = useState([]);
@@ -18,12 +32,18 @@ const FootballCalendar = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [hasData, setHasData] = useState(true);
 
+    // Effect: Reload match data whenever the user navigates to a new month/year
     useEffect(() => {
         const loadedMatches = loadMatchesForMonth(selectedYear, selectedMonth);
         setMatches(loadedMatches);
         setHasData(hasMatchData(selectedYear, selectedMonth));
     }, [selectedYear, selectedMonth]);
 
+    /**
+     * handleDateClick
+     * Triggered when a day cell in the grid is clicked.
+     * Triggers the MatchPopup to show details for that specific day.
+     */
     const handleDateClick = useCallback((day) => {
         const clickedDate = new Date(selectedYear, selectedMonth, day);
         setSelectedDate(clickedDate);
@@ -35,6 +55,7 @@ const FootballCalendar = () => {
         setSelectedDate(null);
     }, []);
 
+    // Accessibility Flush: Handle Escape key to close popups
     useEffect(() => {
         const handleEscKey = (e) => {
             if (e.key === 'Escape' && showPopup) {
@@ -45,6 +66,7 @@ const FootballCalendar = () => {
         return () => window.removeEventListener('keydown', handleEscKey);
     }, [showPopup, closePopup]);
 
+    // UI Polish: Disable background scrolling when a modal/popup is open
     useEffect(() => {
         if (showPopup) {
             document.body.style.overflow = 'hidden';
@@ -58,32 +80,45 @@ const FootballCalendar = () => {
 
     return (
         <div className="max-w-7xl mx-auto p-4 md:p-6 min-h-screen">
-            <div className="glass rounded-2xl p-6 md:p-8 shadow-2xl">
+            {/* Main Content Card: glass effect in dark mode, solid/semi-white on light mode */}
+            <div className={`glass rounded-2xl p-6 md:p-8 shadow-2xl ${isLightTheme ? 'bg-white/80 border border-slate-200' : ''}`}>
+
+                {/* 1. Header (Logo & Branding) */}
                 <Header />
+
+                {/* 2. Controls (Navigation) */}
                 <MonthSelector
                     selectedYear={selectedYear}
                     setSelectedYear={setSelectedYear}
                     selectedMonth={selectedMonth}
                     setSelectedMonth={setSelectedMonth}
                 />
+
+                {/* 3. Empty State Warning: Shown when no JSON data exists for the selected month */}
                 {!hasData && (
-                    <div className="text-center py-8 mb-6 glass-dark rounded-xl border border-amber-500/30">
-                        <div className="text-amber-400 text-lg font-semibold mb-2">
+                    <div className={`text-center py-10 mb-8 rounded-2xl border ${isLightTheme ? 'bg-amber-50 border-amber-200 shadow-sm' : 'glass-dark border-amber-500/30'}`}>
+                        <div className="text-amber-500 text-xl font-bold mb-2">
                             📅 No match data available for this month
                         </div>
-                        <p className="text-slate-400 text-sm">
+                        <p className={`${isLightTheme ? 'text-slate-600' : 'text-slate-400'} text-sm font-medium`}>
                             Match data is available for December 2025 - May 2026
                         </p>
                     </div>
                 )}
+
+                {/* 4. The Main Grid: Renders all the days */}
                 <CalendarGrid
                     year={selectedYear}
                     month={selectedMonth}
                     matches={matches}
                     onDateClick={handleDateClick}
                 />
+
+                {/* 5. Footer (Legends & Metadata) */}
                 <Footer matchCount={matches.length} />
             </div>
+
+            {/* --- Modals (Global Overlays) --- */}
             {showPopup && (
                 <MatchPopup
                     selectedDate={selectedDate}

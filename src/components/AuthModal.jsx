@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Mail, Lock, User, Loader2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 const AuthModal = ({ onClose }) => {
     const { signIn, signUp } = useAuth();
+    const { isLightTheme } = useTheme();
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -20,43 +22,15 @@ const AuthModal = ({ onClose }) => {
         try {
             if (isLogin) {
                 const { data, error } = await signIn(email, password);
-                if (error) {
-                    console.error('Sign in error:', error);
-                    throw error;
-                }
-                console.log('Sign in successful:', data);
+                if (error) throw error;
                 onClose();
             } else {
                 const { data, error } = await signUp(email, password);
-                if (error) {
-                    console.error('Sign up error:', error);
-                    throw error;
-                }
-                console.log('Sign up successful:', data);
-                setMessage('Check your email for the confirmation link!');
+                if (error) throw error;
+                setMessage('Check your email for confirmation!');
             }
         } catch (err) {
-            console.error('Authentication error:', err);
-            setError(err.message || 'An error occurred during authentication');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleGoogleSignIn = async () => {
-        setError('');
-        setLoading(true);
-        try {
-            const { data, error } = await signInWithGoogle();
-            if (error) {
-                console.error('Google sign in error:', error);
-                setError(error.message);
-            } else {
-                console.log('Google sign in initiated:', data);
-            }
-        } catch (err) {
-            console.error('Google sign in error:', err);
-            setError(err.message || 'An error occurred during Google sign in');
+            setError(err.message || 'Authentication error occurred');
         } finally {
             setLoading(false);
         }
@@ -68,7 +42,7 @@ const AuthModal = ({ onClose }) => {
             onClick={onClose}
         >
             <div
-                className="glass-dark rounded-2xl shadow-2xl max-w-md w-full border border-white/10 animate-slideUp overflow-hidden"
+                className={`glass rounded-2xl shadow-2xl max-w-md w-full border ${isLightTheme ? 'border-slate-200' : 'border-white/10'} animate-slideUp overflow-hidden`}
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Header */}
@@ -82,15 +56,15 @@ const AuthModal = ({ onClose }) => {
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="p-6 space-y-4">
+                <form onSubmit={handleSubmit} className={`p-6 space-y-4 ${isLightTheme ? 'bg-white' : ''}`}>
                     {error && (
-                        <div className="bg-red-500/20 border border-red-500/50 text-red-400 px-4 py-3 rounded-lg text-sm">
+                        <div className="bg-red-500/10 border border-red-500/30 text-red-500 px-4 py-3 rounded-lg text-sm font-medium">
                             {error}
                         </div>
                     )}
 
                     {message && (
-                        <div className="bg-green-500/20 border border-green-500/50 text-green-400 px-4 py-3 rounded-lg text-sm">
+                        <div className="bg-green-500/10 border border-green-500/30 text-green-600 px-4 py-3 rounded-lg text-sm font-medium">
                             {message}
                         </div>
                     )}
@@ -104,7 +78,7 @@ const AuthModal = ({ onClose }) => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
-                                className="w-full bg-slate-800/50 border border-white/10 rounded-lg py-3 pl-11 pr-4 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className={`w-full border rounded-lg py-3 pl-11 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${isLightTheme ? 'bg-slate-50 border-slate-200 text-slate-800 placeholder-slate-400' : 'bg-slate-800/50 border-white/10 text-white placeholder-slate-400'}`}
                             />
                         </div>
 
@@ -117,7 +91,7 @@ const AuthModal = ({ onClose }) => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                                 minLength={6}
-                                className="w-full bg-slate-800/50 border border-white/10 rounded-lg py-3 pl-11 pr-4 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className={`w-full border rounded-lg py-3 pl-11 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${isLightTheme ? 'bg-slate-50 border-slate-200 text-slate-800 placeholder-slate-400' : 'bg-slate-800/50 border-white/10 text-white placeholder-slate-400'}`}
                             />
                         </div>
                     </div>
@@ -139,14 +113,14 @@ const AuthModal = ({ onClose }) => {
                 </form>
 
                 {/* Footer */}
-                <div className="px-6 pb-6 text-center">
+                <div className={`px-6 pb-6 text-center ${isLightTheme ? 'bg-white' : ''}`}>
                     <button
                         onClick={() => {
                             setIsLogin(!isLogin);
                             setError('');
                             setMessage('');
                         }}
-                        className="text-blue-400 hover:text-blue-300 text-sm"
+                        className={`hover:underline text-sm font-medium ${isLightTheme ? 'text-blue-600' : 'text-blue-400'}`}
                     >
                         {isLogin ? "Don't have an account? Sign Up" : 'Already have an account? Sign In'}
                     </button>
