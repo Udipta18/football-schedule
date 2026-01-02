@@ -21,18 +21,18 @@ const MatchPopup = ({
 
     return (
         <div
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto animate-fadeIn"
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-2 md:p-4 overflow-y-auto animate-fadeIn"
             onClick={handleBackdropClick}
         >
             <div
-                className="glass-dark rounded-2xl shadow-2xl max-w-3xl w-full my-8 flex flex-col max-h-[calc(100vh-4rem)] border border-white/10 animate-slideUp overflow-hidden"
+                className="glass-dark rounded-2xl shadow-2xl max-w-3xl w-full my-4 md:my-8 flex flex-col max-h-[calc(100vh-2rem)] border border-white/10 animate-slideUp overflow-hidden"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Header */}
-                <div className="bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 p-6 flex justify-between items-center flex-shrink-0">
+                <div className="bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 p-4 md:p-6 flex justify-between items-center flex-shrink-0">
                     <div>
-                        <h2 className="text-2xl font-bold text-white">{dateString}</h2>
-                        <p className="text-white/80 text-sm mt-1">
+                        <h2 className="text-xl md:text-2xl font-bold text-white">{dateString}</h2>
+                        <p className="text-white/80 text-xs md:text-sm mt-1">
                             {dayMatches.length} {dayMatches.length === 1 ? 'match' : 'matches'} scheduled
                         </p>
                     </div>
@@ -46,7 +46,7 @@ const MatchPopup = ({
                 </div>
 
                 {/* Content */}
-                <div className="p-6 overflow-y-auto flex-1" style={{ maxHeight: 'calc(100vh - 16rem)' }}>
+                <div className="p-4 md:p-6 overflow-y-auto flex-1 custom-scrollbar">
                     {dayMatches.length === 0 ? (
                         <div className="text-center py-16">
                             <Calendar size={80} className="mx-auto text-slate-600 mb-6" />

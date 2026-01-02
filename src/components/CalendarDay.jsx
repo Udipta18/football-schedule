@@ -18,7 +18,7 @@ const CalendarDay = ({
         <div
             onClick={() => onClick(day)}
             className={`
-        relative p-3 min-h-[100px] md:min-h-[120px] cursor-pointer transition-all duration-300
+        relative p-1 md:p-3 min-h-[60px] md:min-h-[120px] cursor-pointer transition-all duration-300
         glass-dark rounded-lg border
         ${today
                     ? 'border-blue-500 ring-2 ring-blue-500/30 bg-blue-950/50'
@@ -32,29 +32,29 @@ const CalendarDay = ({
         >
             {/* Day number */}
             <div className={`
-        font-bold text-lg mb-2 flex items-center justify-between
+        font-bold text-sm md:text-lg mb-1 md:mb-2 flex items-center justify-between
         ${today ? 'text-blue-400' : hasFavoriteMatch ? 'text-amber-400' : 'text-white'}
       `}>
                 <span>{day}</span>
                 <div className="flex items-center gap-1">
                     {today && (
-                        <span className="text-[10px] bg-blue-500 text-white px-2 py-0.5 rounded-full font-medium">
+                        <span className="hidden md:inline-block text-[10px] bg-blue-500 text-white px-2 py-0.5 rounded-full font-medium">
                             TODAY
                         </span>
                     )}
                     {hasFavoriteMatch && (
-                        <span className="text-[10px] bg-amber-500 text-black px-1.5 py-0.5 rounded-full font-medium">
+                        <span className="hidden md:inline-block text-[10px] bg-amber-500 text-black px-1.5 py-0.5 rounded-full font-medium">
                             ⭐ {favoriteCount}
                         </span>
                     )}
                     {hasLiveMatch && !today && !hasFavoriteMatch && (
-                        <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse-glow"></span>
+                        <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-red-500 rounded-full animate-pulse-glow"></span>
                     )}
                 </div>
             </div>
 
-            {/* Match previews */}
-            <div className="space-y-1.5">
+            {/* Match previews - Desktop */}
+            <div className="hidden md:block space-y-1.5">
                 {matches.slice(0, 2).map(match => {
                     const isMatchFavorite = isFavorite(match.id);
                     return (
@@ -95,10 +95,27 @@ const CalendarDay = ({
                 )}
             </div>
 
+            {/* Mobile Indicators - Icons */}
+            <div className="md:hidden flex justify-center mt-1">
+                {matches.length > 0 && (
+                    <span
+                        className={`
+                            text-[12px] leading-none select-none
+                            ${hasLiveMatch ? 'animate-pulse scale-110' : ''}
+                            ${hasFavoriteMatch ? 'drop-shadow-glow-gold' : ''}
+                        `}
+                        role="img"
+                        aria-label="football"
+                    >
+                        ⚽
+                    </span>
+                )}
+            </div>
+
             {/* Match count badge */}
             {matches.length > 0 && (
                 <div className={`
-          absolute top-2 right-2 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full
+          absolute top-1 right-1 md:top-2 md:right-2 text-white text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded-full
           ${hasFavoriteMatch
                         ? 'bg-gradient-to-r from-amber-500 to-orange-500'
                         : 'bg-gradient-to-r from-blue-500 to-emerald-500'
