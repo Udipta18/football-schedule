@@ -1,13 +1,24 @@
 import { weekDays } from '../data/constants';
 import { getDaysInMonth, getFirstDayOfMonth } from '../utils/matchUtils';
 import CalendarDay from './CalendarDay';
+import { useTheme } from '../context/ThemeContext';
 
+/**
+ * CalendarGrid Component
+ * Renders the 7-column grid layout for the selected month.
+ * 
+ * Logic Highlights:
+ * 1. Padding Blanks: Calculates the empty cells (blanks) needed at the start of the month based on the weekday.
+ * 2. Header Abbreviations: Uses responsive logic to show only the first letter (S, M, T) on mobile but Sun, Mon on desktop.
+ * 3. Theme Awareness: Dynamically switches background/text colors for the headers.
+ */
 const CalendarGrid = ({
     year,
     month,
     matches,
     onDateClick
 }) => {
+    const { isLightTheme } = useTheme();
     const daysInMonth = getDaysInMonth(year, month);
     const firstDay = getFirstDayOfMonth(year, month);
 
@@ -15,19 +26,27 @@ const CalendarGrid = ({
         return matches.filter(match => match.day === day);
     };
 
+    /**
+     * renderBlankDays
+     * Safely renders empty div cells to align the 1st of the month with the correct weekday.
+     */
     const renderBlankDays = () => {
         const blanks = [];
         for (let i = 0; i < firstDay; i++) {
             blanks.push(
                 <div
                     key={`blank-${i}`}
-                    className="min-h-[100px] md:min-h-[120px] rounded-lg bg-slate-900/30"
+                    className={`min-h-[60px] md:min-h-[120px] rounded-lg transition-colors ${isLightTheme ? 'bg-slate-100' : 'bg-slate-900/30'}`}
                 />
             );
         }
         return blanks;
     };
 
+    /**
+     * renderDays
+     * Maps through days [1-31] and creates CalendarDay components.
+     */
     const renderDays = () => {
         const days = [];
         for (let day = 1; day <= daysInMonth; day++) {
@@ -48,26 +67,34 @@ const CalendarGrid = ({
 
     return (
         <div className="mb-6">
-            {/* Week day headers */}
-            <div className="grid grid-cols-7 gap-2 mb-3">
+            {/* 1. Header Row (Day Labels) */}
+            <div className="grid grid-cols-7 gap-1.5 md:gap-2 mb-3">
                 {weekDays.map((day, index) => (
                     <div
                         key={day}
                         className={`
-              p-3 text-center font-bold text-sm rounded-lg
-              ${index === 0 || index === 6
-                                ? 'text-amber-400 bg-amber-400/10'
-                                : 'text-slate-300 bg-slate-800/50'
+                            py-2 md:py-3 text-center font-bold text-[10px] md:text-sm rounded-lg transition-all
+                            ${index === 0 || index === 6
+                                ? 'text-amber-500 bg-amber-500/10'
+                                : isLightTheme
+                                    ? 'text-slate-600 bg-slate-100'
+                                    : 'text-slate-300 bg-slate-800/50'
                             }
-            `}
+                        `}
                     >
-                        {day}
+                        {/* 
+                            Mobile optimization: 
+                            - On small screens, we only show the first character (Sun -> S) 
+                            - On medium screens (md:), we show the full 'Sun', 'Mon' etc.
+                        */}
+                        <span className="md:hidden">{day.charAt(0)}</span>
+                        <span className="hidden md:inline">{day}</span>
                     </div>
                 ))}
             </div>
 
-            {/* Calendar days */}
-            <div className="grid grid-cols-7 gap-2">
+            {/* 2. Main Calendar Body (Grid) */}
+            <div className="grid grid-cols-7 gap-1.5 md:gap-2">
                 {renderBlankDays()}
                 {renderDays()}
             </div>
