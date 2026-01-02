@@ -87,6 +87,8 @@
 
 html {
   scroll-behavior: smooth;
+  overscroll-behavior: none;
+  /* Prevents pull-to-refresh and bounce effects */
 }
 
 body {
@@ -97,6 +99,10 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+  /* Secondary containment for mobile browsers */
+  touch-action: manipulation;
+  /* Improves performance by disabling double-tap-zoom */
 }
 
 /* Custom scrollbar */
