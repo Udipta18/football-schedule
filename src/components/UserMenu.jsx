@@ -14,13 +14,25 @@ const UserMenu = () => {
 
     if (!user) {
         return (
-            <button
-                onClick={openAuthModal}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium transition-colors"
-            >
-                <LogIn size={18} />
-                Sign In
-            </button>
+            <>
+                {/* Desktop: Full Sign In Button */}
+                <button
+                    onClick={openAuthModal}
+                    className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium transition-colors"
+                >
+                    <LogIn size={18} />
+                    Sign In
+                </button>
+
+                {/* Mobile: Icon Only Sign In Button */}
+                <button
+                    onClick={openAuthModal}
+                    className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition-colors"
+                    aria-label="Sign In"
+                >
+                    <LogIn size={20} />
+                </button>
+            </>
         );
     }
 
