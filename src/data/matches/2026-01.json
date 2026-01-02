@@ -45,14 +45,14 @@
             "status": "completed"
         },
         {
-            "id": "PL-2026-01-03-FUL-LIV",
+            "id": "PL-2026-01-04-FUL-LIV",
             "league": "Premier League",
-            "date": "2026-01-03",
+            "date": "2026-01-04",
             "time": "20:30",
             "home": "Fulham",
             "away": "Liverpool",
             "venue": "Craven Cottage, London",
-            "status": "completed"
+            "status": "scheduled"
         },
         {
             "id": "PL-2026-01-09-ARS-LIV",
@@ -65,43 +65,123 @@
             "status": "completed"
         },
         {
-            "id": "LL-2026-01-04-RMA-BET",
-            "league": "La Liga",
+            "id": "LL-2026-01-04-ESP-BAR",
+            "league": "LaLiga EA Sports",
             "date": "2026-01-04",
-            "time": "19:45",
+            "time": "01:30",
+            "home": "Espanyol",
+            "away": "Barcelona",
+            "venue": "RCDE Stadium, Barcelona",
+            "status": "scheduled"
+        },
+        {
+            "id": "LL-2026-01-04-RMA-BET",
+            "league": "LaLiga EA Sports",
+            "date": "2026-01-04",
+            "time": "20:45",
             "home": "Real Madrid",
             "away": "Real Betis",
             "venue": "Santiago Bernabéu, Madrid",
-            "status": "completed"
+            "status": "scheduled"
         },
         {
-            "id": "LL-2026-01-05-RSO-ATM",
-            "league": "La Liga",
-            "date": "2026-01-05",
+            "id": "SSC-2026-01-08-BAR-ATH",
+            "league": "Spanish Super Cup",
+            "date": "2026-01-08",
+            "time": "01:30",
+            "home": "Barcelona",
+            "away": "Athletic Club",
+            "venue": "Al-Awwal Park, Riyadh",
+            "status": "scheduled"
+        },
+        {
+            "id": "SSC-2026-01-09-RMA-ATM",
+            "league": "Spanish Super Cup",
+            "date": "2026-01-09",
             "time": "00:30",
-            "home": "Real Sociedad",
+            "home": "Real Madrid",
             "away": "Atletico Madrid",
-            "venue": "Reale Arena, San Sebastián",
-            "status": "completed"
+            "venue": "Al-Awwal Park, Riyadh",
+            "status": "scheduled"
         },
         {
             "id": "LL-2026-01-17-RMA-LEV",
-            "league": "La Liga",
+            "league": "LaLiga EA Sports",
             "date": "2026-01-17",
-            "time": "17:30",
+            "time": "18:30",
             "home": "Real Madrid",
             "away": "Levante",
             "venue": "Santiago Bernabéu, Madrid",
             "status": "scheduled"
         },
         {
-            "id": "LL-2026-01-19-RSO-BAR",
-            "league": "La Liga",
+            "id": "LL-2026-01-19-SOC-BAR",
+            "league": "LaLiga EA Sports",
             "date": "2026-01-19",
-            "time": "00:30",
+            "time": "01:30",
             "home": "Real Sociedad",
             "away": "Barcelona",
             "venue": "Reale Arena, San Sebastián",
+            "status": "scheduled"
+        },
+        {
+            "id": "UCL-2026-01-21-RMA-MON",
+            "league": "UEFA Champions League",
+            "date": "2026-01-21",
+            "time": "01:30",
+            "home": "Real Madrid",
+            "away": "Monaco",
+            "venue": "Santiago Bernabéu, Madrid",
+            "status": "scheduled"
+        },
+        {
+            "id": "UCL-2026-01-22-BAR-SLA",
+            "league": "UEFA Champions League",
+            "date": "2026-01-22",
+            "time": "01:30",
+            "home": "Slavia Prague",
+            "away": "Barcelona",
+            "venue": "Eden Arena, Prague",
+            "status": "scheduled"
+        },
+        {
+            "id": "LL-2026-01-25-VIL-RMA",
+            "league": "LaLiga EA Sports",
+            "date": "2026-01-25",
+            "time": "20:30",
+            "home": "Villarreal",
+            "away": "Real Madrid",
+            "venue": "Estadio de la Cerámica, Villarreal",
+            "status": "scheduled"
+        },
+        {
+            "id": "LL-2026-01-26-BAR-OVI",
+            "league": "LaLiga EA Sports",
+            "date": "2026-01-26",
+            "time": "01:30",
+            "home": "Barcelona",
+            "away": "Real Oviedo",
+            "venue": "Spotify Camp Nou, Barcelona",
+            "status": "scheduled"
+        },
+        {
+            "id": "UCL-2026-01-29-BAR-COP",
+            "league": "UEFA Champions League",
+            "date": "2026-01-29",
+            "time": "01:30",
+            "home": "Barcelona",
+            "away": "Copenhagen",
+            "venue": "Spotify Camp Nou, Barcelona",
+            "status": "scheduled"
+        },
+        {
+            "id": "UCL-2026-01-29-BEN-RMA",
+            "league": "UEFA Champions League",
+            "date": "2026-01-29",
+            "time": "01:30",
+            "home": "Benfica",
+            "away": "Real Madrid",
+            "venue": "Estádio da Luz, Lisbon",
             "status": "scheduled"
         }
     ]

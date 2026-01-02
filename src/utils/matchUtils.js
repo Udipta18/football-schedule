@@ -7,14 +7,16 @@ const leagueColors = {
   'Serie A': { color: '#024494', icon: '🇮🇹' },
   'Bundesliga': { color: '#d20515', icon: '🇩🇪' },
   'Ligue 1': { color: '#091c3e', icon: '🇫🇷' },
-  'UEFA Champions League': { color: '#0d1541', icon: '🏆' },
+  'UEFA Champions League': { color: '#001a57', icon: '/ucl-logo.png' },
   'UEFA Europa League': { color: '#f68e1e', icon: '🌟' },
   'FIFA World Cup': { color: '#56042c', icon: '🌍' },
   'FIFA Club World Cup': { color: '#1a472a', icon: '🏆' },
   'Copa America': { color: '#1e3a5f', icon: '🌎' },
   'AFC Asian Cup': { color: '#ff6b00', icon: '🌏' },
   'Africa Cup of Nations': { color: '#008c45', icon: '🌍' },
-  'Saudi Pro League': { color: '#006c35', icon: '🇸🇦' }
+  'Saudi Pro League': { color: '#006c35', icon: '🇸🇦' },
+  'Spanish Super Cup': { color: '#ffc107', icon: '🏆' },
+  'LaLiga EA Sports': { color: '#ee8707', icon: '🇪🇸' }
 };
 
 /**

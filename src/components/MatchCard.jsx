@@ -55,10 +55,15 @@ const MatchCard = ({ match, index }) => {
 
             {/* Competition badge */}
             <div
-                className="absolute top-0 right-0 px-3 py-1.5 rounded-bl-xl text-xs font-bold text-white"
+                className="absolute top-0 right-0 px-3 py-1.5 rounded-bl-xl text-xs font-bold text-white flex items-center gap-1.5"
                 style={{ backgroundColor: match.competitionColor || '#3b82f6' }}
             >
-                {match.competitionIcon} {match.competition}
+                {match.competitionIcon && (match.competitionIcon.startsWith('http') || match.competitionIcon.startsWith('/') || match.competitionIcon.startsWith('data:')) ? (
+                    <img src={match.competitionIcon} alt="" className="w-4 h-4 object-contain invert mix-blend-screen" />
+                ) : (
+                    <span>{match.competitionIcon}</span>
+                )}
+                <span>{match.competition}</span>
             </div>
 
             {/* Live badge */}

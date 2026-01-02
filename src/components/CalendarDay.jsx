@@ -57,6 +57,10 @@ const CalendarDay = ({
             <div className="hidden md:block space-y-1.5">
                 {matches.slice(0, 2).map(match => {
                     const isMatchFavorite = isFavorite(match.id);
+                    const isUCL = match.competition === 'UEFA Champions League';
+                    const icon = match.competitionIcon;
+                    const isImgIcon = icon && (icon.startsWith('http') || icon.startsWith('/') || icon.startsWith('data:'));
+
                     return (
                         <div
                             key={match.id}
@@ -66,22 +70,31 @@ const CalendarDay = ({
                                     ? 'bg-red-500/20 border border-red-500/40'
                                     : isMatchFavorite
                                         ? 'bg-amber-500/20 border border-amber-500/40'
-                                        : 'bg-emerald-500/15 border border-emerald-500/30'
+                                        : isUCL
+                                            ? 'bg-blue-900/40 border border-indigo-500/30'
+                                            : 'bg-emerald-500/15 border border-emerald-500/30'
                                 }
               `}
                         >
-                            <div className="flex items-center gap-1">
-                                {match.status === 'Live' && (
-                                    <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
+                            <div className="flex items-center gap-1.5">
+                                {isImgIcon ? (
+                                    <img src={icon} className="w-3 h-3 object-contain invert mix-blend-screen opacity-90" alt="" />
+                                ) : (
+                                    <span className="text-[10px] w-3 text-center">{icon}</span>
                                 )}
-                                {isMatchFavorite && match.status !== 'Live' && (
-                                    <span className="text-amber-400">⭐</span>
-                                )}
-                                <span className={`font-semibold ${isMatchFavorite ? 'text-amber-400' : 'text-emerald-400'}`}>
-                                    {match.time}
-                                </span>
+                                <div className="flex items-center gap-1">
+                                    {match.status === 'Live' && (
+                                        <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
+                                    )}
+                                    {isMatchFavorite && match.status !== 'Live' && (
+                                        <span className="text-amber-400">⭐</span>
+                                    )}
+                                    <span className={`font-semibold ${isMatchFavorite ? 'text-amber-400' : 'text-emerald-400'}`}>
+                                        {match.time}
+                                    </span>
+                                </div>
                             </div>
-                            <div className="text-slate-300 truncate mt-0.5">
+                            <div className="text-slate-300 truncate mt-0.5 ml-4">
                                 {match.homeTeam.split(' ')[0]} vs {match.awayTeam.split(' ')[0]}
                             </div>
                         </div>
@@ -97,19 +110,32 @@ const CalendarDay = ({
 
             {/* Mobile Indicators - Icons */}
             <div className="md:hidden flex justify-center mt-1">
-                {matches.length > 0 && (
-                    <span
-                        className={`
-                            text-[12px] leading-none select-none
-                            ${hasLiveMatch ? 'animate-pulse scale-110' : ''}
-                            ${hasFavoriteMatch ? 'drop-shadow-glow-gold' : ''}
-                        `}
-                        role="img"
-                        aria-label="football"
-                    >
-                        ⚽
-                    </span>
-                )}
+                {matches.length > 0 && (() => {
+                    const uclMatch = matches.find(m => m.competition === 'UEFA Champions League');
+                    const displayMatch = uclMatch || matches[0];
+                    const icon = displayMatch.competitionIcon;
+                    const isImg = icon && (icon.startsWith('http') || icon.startsWith('/') || icon.startsWith('data:'));
+
+                    return (
+                        <div
+                            className={`
+                                flex items-center justify-center
+                                ${hasLiveMatch ? 'animate-pulse scale-110' : ''}
+                                ${hasFavoriteMatch ? 'drop-shadow-glow-gold' : ''}
+                            `}
+                        >
+                            {isImg ? (
+                                <img
+                                    src={icon}
+                                    alt="Logo"
+                                    className="w-4 h-4 object-contain invert mix-blend-screen drop-shadow-md"
+                                />
+                            ) : (
+                                <span className="text-[12px] leading-none select-none">{icon || '⚽'}</span>
+                            )}
+                        </div>
+                    );
+                })()}
             </div>
 
             {/* Match count badge */}
