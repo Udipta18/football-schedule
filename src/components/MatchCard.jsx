@@ -104,37 +104,40 @@ const MatchCard = ({ match, index }) => {
             </div>
 
             {/* Action buttons */}
-            <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-white/10">
-                <button
-                    onClick={handleFavoriteClick}
-                    className={`
-            flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all
-            ${isMarked
-                            ? 'bg-amber-500 text-black hover:bg-amber-400'
-                            : 'bg-slate-700 text-slate-300 hover:bg-slate-600 hover:text-white'
-                        }
-          `}
-                >
-                    <Star size={16} fill={isMarked ? 'currentColor' : 'none'} />
-                    {isMarked ? 'Marked' : 'Mark Important'}
-                </button>
+            {/* Action buttons - Only show if not completed */}
+            {match.status !== 'Completed' && (
+                <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-white/10">
+                    <button
+                        onClick={handleFavoriteClick}
+                        className={`
+              flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all
+              ${isMarked
+                                ? 'bg-amber-500 text-black hover:bg-amber-400'
+                                : 'bg-slate-700 text-slate-300 hover:bg-slate-600 hover:text-white'
+                            }
+            `}
+                    >
+                        <Star size={16} fill={isMarked ? 'currentColor' : 'none'} />
+                        {isMarked ? 'Marked' : 'Mark Important'}
+                    </button>
 
-                <button
-                    onClick={handleCalendarClick}
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-500 transition-all"
-                >
-                    <Calendar size={16} />
-                    Add to Calendar
-                </button>
+                    <button
+                        onClick={handleCalendarClick}
+                        className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-500 transition-all"
+                    >
+                        <Calendar size={16} />
+                        Add to Calendar
+                    </button>
 
-                <button
-                    onClick={handleWhatsAppClick}
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-green-600 text-white hover:bg-green-500 transition-all"
-                >
-                    <MessageCircle size={16} />
-                    Share WhatsApp
-                </button>
-            </div>
+                    <button
+                        onClick={handleWhatsAppClick}
+                        className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-green-600 text-white hover:bg-green-500 transition-all"
+                    >
+                        <MessageCircle size={16} />
+                        Share WhatsApp
+                    </button>
+                </div>
+            )}
 
             {/* Status badge */}
             <div className="flex justify-between items-center mt-4 pt-3 border-t border-white/5 text-xs text-slate-500">
@@ -144,7 +147,9 @@ const MatchCard = ({ match, index }) => {
             px-3 py-1 rounded-full font-semibold
             ${match.status === 'Live'
                             ? 'bg-red-500/20 text-red-400 border border-red-500/30'
-                            : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                            : match.status === 'Completed'
+                                ? 'bg-red-900/30 text-red-300 border border-red-800/30'
+                                : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                         }
           `}
                 >

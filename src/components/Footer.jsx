@@ -15,6 +15,10 @@ const Footer = ({ matchCount = 0 }) => {
             </div>
             <div className="flex flex-wrap justify-center gap-4 mt-4 pt-4 border-t border-white/10 text-xs">
                 <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 bg-red-800 rounded-full"></span>
+                    <span className="text-slate-400">Completed</span>
+                </div>
+                <div className="flex items-center gap-2">
                     <span className="w-3 h-3 bg-emerald-500 rounded-full"></span>
                     <span className="text-slate-400">Scheduled</span>
                 </div>

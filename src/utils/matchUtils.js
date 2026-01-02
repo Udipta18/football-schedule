@@ -53,23 +53,75 @@ export const loadMatchesForMonth = (year, month) => {
   }
 
   return data.matches.map(match => {
-    const matchDate = new Date(match.date);
+    let matchDateObj;
+    let timeStr;
+    
+    // Handle new JSON format with kickoff_datetime_ist
+    if (match.kickoff_datetime_ist) {
+      matchDateObj = new Date(match.kickoff_datetime_ist);
+      // Format time as HH:MM
+      timeStr = matchDateObj.toLocaleTimeString('en-GB', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: false 
+      });
+    } else {
+      // Fallback for old format
+      const dateStr = match.date;
+      timeStr = match.time || match.time_ist || '00:00';
+      
+      let parseTime = timeStr;
+      if (timeStr === 'TBD') {
+        parseTime = '00:00';
+      }
+
+      if (dateStr) {
+        matchDateObj = new Date(`${dateStr}T${parseTime}`);
+      } else {
+        matchDateObj = new Date(); // Fallback safety
+      }
+    }
+
+    // Adjust time for Spanish leagues (add 1 hour)
+    if (match.league === 'La Liga') {
+      matchDateObj.setHours(matchDateObj.getHours() + 1);
+      // Update time string to reflect the new time
+      timeStr = matchDateObj.toLocaleTimeString('en-GB', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: false 
+      });
+    }
+
     const venue = parseVenue(match.venue);
     const leagueStyle = getLeagueStyle(match.league);
     
+    // Status Logic: Purely time-based as per user request
+    const now = new Date();
+    // Assuming a match lasts ~2 hours
+    const matchEndTime = new Date(matchDateObj.getTime() + 2 * 60 * 60 * 1000);
+    
+    let status = 'Scheduled';
+    
+    if (now > matchEndTime) {
+      status = 'Completed';
+    } else if (now >= matchDateObj) {
+      status = 'Live';
+    }
+
     return {
       id: match.id,
-      date: matchDate,
-      day: matchDate.getDate(),
+      date: matchDateObj, // Store full Date object
+      day: matchDateObj.getDate(),
       homeTeam: match.home,
       awayTeam: match.away,
       competition: match.league,
       competitionColor: leagueStyle.color,
       competitionIcon: leagueStyle.icon,
-      time: match.time,
+      time: timeStr,
       venue: venue.name,
       venueCity: venue.city,
-      status: match.status === 'live' ? 'Live' : 'Scheduled'
+      status: status
     };
   }).sort((a, b) => {
     if (a.day !== b.day) return a.day - b.day;
@@ -117,7 +169,8 @@ export const isToday = (day, month, year) => {
  * @returns {string} - Formatted date string
  */
 export const formatDate = (date) => {
-  return date.toLocaleDateString('en-US', { 
+  const d = new Date(date);
+  return d.toLocaleDateString('en-US', { 
     weekday: 'long', 
     year: 'numeric', 
     month: 'long', 
