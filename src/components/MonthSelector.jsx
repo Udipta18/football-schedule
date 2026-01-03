@@ -15,7 +15,8 @@ const MonthSelector = ({
     selectedYear,
     setSelectedYear,
     selectedMonth,
-    setSelectedMonth
+    setSelectedMonth,
+    onGoToToday
 }) => {
     // Hooks: Theme context
     const { isLightTheme } = useTheme();
@@ -53,13 +54,13 @@ const MonthSelector = ({
     };
 
     /**
-     * goToToday
-     * Convenience function to reset the view to the current real-world date.
+     * handleJumpToToday
+     * Uses the parent's onGoToToday function to navigate and open popup
      */
-    const goToToday = () => {
-        const today = new Date();
-        setSelectedYear(today.getFullYear());
-        setSelectedMonth(today.getMonth());
+    const handleJumpToToday = () => {
+        if (onGoToToday) {
+            onGoToToday();
+        }
     };
 
     return (
@@ -118,7 +119,7 @@ const MonthSelector = ({
 
             {/* 2. Today Shortcut Button */}
             <button
-                onClick={goToToday}
+                onClick={handleJumpToToday}
                 className="btn-primary text-sm px-6 py-2.5"
             >
                 Jump to Today

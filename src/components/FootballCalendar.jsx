@@ -70,6 +70,18 @@ const FootballCalendar = () => {
         setSelectedDate(null);
     }, []);
 
+    /**
+     * handleGoToToday
+     * Navigates to current month/year and opens popup for today's matches
+     */
+    const handleGoToToday = useCallback(() => {
+        const today = new Date();
+        setSelectedYear(today.getFullYear());
+        setSelectedMonth(today.getMonth());
+        setSelectedDate(today);
+        setShowPopup(true);
+    }, []);
+
     // Accessibility Flush: Handle Escape key to close popups
     useEffect(() => {
         const handleEscKey = (e) => {
@@ -107,6 +119,7 @@ const FootballCalendar = () => {
                     setSelectedYear={setSelectedYear}
                     selectedMonth={selectedMonth}
                     setSelectedMonth={setSelectedMonth}
+                    onGoToToday={handleGoToToday}
                 />
 
                 {/* 3. Team Search */}
