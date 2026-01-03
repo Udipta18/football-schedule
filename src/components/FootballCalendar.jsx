@@ -3,8 +3,10 @@ import { loadMatchesForMonth } from '../utils/matchUtils';
 import { hasMatchData } from '../data/matches';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
+import { filterMatchesByTeam } from '../utils/teamAbbreviations';
 import Header from './Header';
 import MonthSelector from './MonthSelector';
+import TeamSearch from './TeamSearch';
 import CalendarGrid from './CalendarGrid';
 import MatchPopup from './MatchPopup';
 import Footer from './Footer';
@@ -28,6 +30,8 @@ const FootballCalendar = () => {
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
     const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
     const [matches, setMatches] = useState([]);
+    const [filteredMatches, setFilteredMatches] = useState([]);
+    const [teamSearchQuery, setTeamSearchQuery] = useState('');
     const [selectedDate, setSelectedDate] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
     const [hasData, setHasData] = useState(true);
@@ -38,6 +42,17 @@ const FootballCalendar = () => {
         setMatches(loadedMatches);
         setHasData(hasMatchData(selectedYear, selectedMonth));
     }, [selectedYear, selectedMonth]);
+
+    // Effect: Filter matches when search query or matches change
+    useEffect(() => {
+        const filtered = filterMatchesByTeam(matches, teamSearchQuery);
+        setFilteredMatches(filtered);
+    }, [matches, teamSearchQuery]);
+
+    // Handle team search
+    const handleTeamSearch = useCallback((query) => {
+        setTeamSearchQuery(query);
+    }, []);
 
     /**
      * handleDateClick
@@ -94,7 +109,13 @@ const FootballCalendar = () => {
                     setSelectedMonth={setSelectedMonth}
                 />
 
-                {/* 3. Empty State Warning: Shown when no JSON data exists for the selected month */}
+                {/* 3. Team Search */}
+                <TeamSearch
+                    onSearch={handleTeamSearch}
+                    currentSearch={teamSearchQuery}
+                />
+
+                {/* 4. Empty State Warning: Shown when no JSON data exists for the selected month */}
                 {!hasData && (
                     <div className={`text-center py-10 mb-8 rounded-2xl border ${isLightTheme ? 'bg-amber-50 border-amber-200 shadow-sm' : 'glass-dark border-amber-500/30'}`}>
                         <div className="text-amber-500 text-xl font-bold mb-2">
@@ -106,23 +127,23 @@ const FootballCalendar = () => {
                     </div>
                 )}
 
-                {/* 4. The Main Grid: Renders all the days */}
+                {/* 5. The Main Grid: Renders all the days */}
                 <CalendarGrid
                     year={selectedYear}
                     month={selectedMonth}
-                    matches={matches}
+                    matches={filteredMatches}
                     onDateClick={handleDateClick}
                 />
 
-                {/* 5. Footer (Legends & Metadata) */}
-                <Footer matchCount={matches.length} />
+                {/* 6. Footer (Legends & Metadata) */}
+                <Footer matchCount={filteredMatches.length} />
             </div>
 
             {/* --- Modals (Global Overlays) --- */}
             {showPopup && (
                 <MatchPopup
                     selectedDate={selectedDate}
-                    matches={matches}
+                    matches={filteredMatches}
                     onClose={closePopup}
                 />
             )}

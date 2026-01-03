@@ -1,6 +1,7 @@
 import { isToday } from '../utils/matchUtils';
 import { useFavorites } from '../context/FavoritesContext';
 import { useTheme } from '../context/ThemeContext';
+import { formatMatchDisplay } from '../utils/teamAbbreviations';
 
 /**
  * CalendarDay Component
@@ -99,11 +100,11 @@ const CalendarDay = ({
                                 {isImgIcon ? (
                                     <img
                                         src={icon}
-                                        className={`w-3 h-3 object-contain opacity-90 ${!isLightTheme ? 'invert mix-blend-screen' : ''}`}
+                                        className={`w-5 h-5 object-contain opacity-90 ${!isLightTheme ? 'invert mix-blend-screen' : ''}`}
                                         alt=""
                                     />
                                 ) : (
-                                    <span className="text-[10px] w-3 text-center">{icon}</span>
+                                    <span className="text-sm w-5 text-center">{icon}</span>
                                 )}
                                 <div className="flex items-center gap-1">
                                     {match.status === 'Live' && (
@@ -114,9 +115,9 @@ const CalendarDay = ({
                                     </span>
                                 </div>
                             </div>
-                            {/* Match Teams: Truncated to prevent layout break */}
+                            {/* Match Teams: Using meaningful abbreviations */}
                             <div className={`truncate mt-0.5 ml-4 ${isLightTheme ? 'text-slate-600' : 'text-slate-300'}`}>
-                                {match.homeTeam.split(' ')[0]} vs {match.awayTeam.split(' ')[0]}
+                                {formatMatchDisplay(match.homeTeam, match.awayTeam)}
                             </div>
                         </div>
                     );
@@ -151,10 +152,10 @@ const CalendarDay = ({
                                 <img
                                     src={icon}
                                     alt="Logo"
-                                    className={`w-4 h-4 object-contain drop-shadow-md ${!isLightTheme ? 'invert mix-blend-screen' : ''}`}
+                                    className={`w-6 h-6 object-contain drop-shadow-md ${!isLightTheme ? 'invert mix-blend-screen' : ''}`}
                                 />
                             ) : (
-                                <span className="text-[12px] leading-none select-none">{icon || '⚽'}</span>
+                                <span className="text-base leading-none select-none">{icon || '⚽'}</span>
                             )}
                         </div>
                     );
