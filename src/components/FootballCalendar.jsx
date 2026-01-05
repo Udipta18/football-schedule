@@ -108,49 +108,92 @@ const FootballCalendar = () => {
     return (
         <div className="max-w-7xl mx-auto p-4 md:p-6 min-h-screen">
             {/* Main Content Card: glass effect in dark mode, solid/semi-white on light mode */}
-            <div className={`glass rounded-2xl p-6 md:p-8 shadow-2xl ${isLightTheme ? 'bg-white/80 border border-slate-200' : ''}`}>
-
-                {/* 1. Header (Logo & Branding) */}
-                <Header />
-
-                {/* 2. Controls (Navigation) */}
-                <MonthSelector
-                    selectedYear={selectedYear}
-                    setSelectedYear={setSelectedYear}
-                    selectedMonth={selectedMonth}
-                    setSelectedMonth={setSelectedMonth}
-                    onGoToToday={handleGoToToday}
-                />
-
-                {/* 3. Team Search */}
-                <TeamSearch
-                    onSearch={handleTeamSearch}
-                    currentSearch={teamSearchQuery}
-                />
-
-                {/* 4. Empty State Warning: Shown when no JSON data exists for the selected month */}
-                {!hasData && (
-                    <div className={`text-center py-10 mb-8 rounded-2xl border ${isLightTheme ? 'bg-amber-50 border-amber-200 shadow-sm' : 'glass-dark border-amber-500/30'}`}>
-                        <div className="text-amber-500 text-xl font-bold mb-2">
-                            📅 No match data available for this month
-                        </div>
-                        <p className={`${isLightTheme ? 'text-slate-600' : 'text-slate-400'} text-sm font-medium`}>
-                            Match data is available for December 2025 - May 2026
-                        </p>
-                    </div>
+            <div
+                className={`glass rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden ${isLightTheme ? 'bg-white/80 border border-slate-200' : ''}`}
+                style={
+                    selectedMonth === 0 ? {
+                        backgroundImage: 'url(/january-bg.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat'
+                    } : selectedMonth === 1 ? {
+                        backgroundImage: 'url(/february-bg.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat'
+                    } : selectedMonth === 2 ? {
+                        backgroundImage: 'url(/march-bg.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center top',
+                        backgroundRepeat: 'no-repeat'
+                    } : selectedMonth === 3 ? {
+                        backgroundImage: 'url(/april-bg.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat'
+                    } : {}
+                }
+            >
+                {/* Background overlay for January, February, March, and April to ensure text readability */}
+                {(selectedMonth === 0 || selectedMonth === 1 || selectedMonth === 2 || selectedMonth === 3) && (
+                    <div className={`absolute inset-0 ${isLightTheme ? 'bg-slate-900/50' : 'bg-slate-900/70'} pointer-events-none`} />
                 )}
 
-                {/* 5. The Main Grid: Renders all the days */}
-                <CalendarGrid
-                    year={selectedYear}
-                    month={selectedMonth}
-                    matches={filteredMatches}
-                    onDateClick={handleDateClick}
-                />
+                {/* All content with relative positioning to appear above overlay */}
+                <div className="relative z-10">
 
-                {/* 6. Footer (Legends & Metadata) */}
-                <Footer matchCount={filteredMatches.length} />
+                    {/* 1. Header (Logo & Branding) */}
+                    <Header hasBackgroundImage={selectedMonth === 0 || selectedMonth === 1 || selectedMonth === 2 || selectedMonth === 3} />
+
+                    {/* 2. Controls Row - Search on left, Month selector on right */}
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-2 mb-4">
+                        {/* Left: Team Search */}
+                        <div className="w-full md:w-auto md:flex-shrink-0">
+                            <TeamSearch
+                                onSearch={handleTeamSearch}
+                                currentSearch={teamSearchQuery}
+                            />
+                        </div>
+
+                        {/* Right: Month Selector */}
+                        <div className="flex justify-end md:flex-shrink-0">
+                            <MonthSelector
+                                selectedYear={selectedYear}
+                                setSelectedYear={setSelectedYear}
+                                selectedMonth={selectedMonth}
+                                setSelectedMonth={setSelectedMonth}
+                                onGoToToday={handleGoToToday}
+                            />
+                        </div>
+                    </div>
+
+                    {/* 4. Empty State Warning: Shown when no JSON data exists for the selected month */}
+                    {!hasData && (
+                        <div className={`text-center py-10 mb-8 rounded-2xl border ${isLightTheme ? 'bg-amber-50 border-amber-200 shadow-sm' : 'glass-dark border-amber-500/30'}`}>
+                            <div className="text-amber-500 text-xl font-bold mb-2">
+                                📅 No match data available for this month
+                            </div>
+                            <p className={`${isLightTheme ? 'text-slate-600' : 'text-slate-400'} text-sm font-medium`}>
+                                Match data is available for December 2025 - May 2026
+                            </p>
+                        </div>
+                    )}
+
+                    {/* 5. The Main Grid: Renders all the days */}
+                    <CalendarGrid
+                        year={selectedYear}
+                        month={selectedMonth}
+                        matches={filteredMatches}
+                        onDateClick={handleDateClick}
+                        hasBackgroundImage={selectedMonth === 0 || selectedMonth === 1 || selectedMonth === 2 || selectedMonth === 3}
+                    />
+
+                    {/* 6. Footer (Legends & Metadata) */}
+                    <Footer matchCount={filteredMatches.length} hasBackgroundImage={selectedMonth === 0 || selectedMonth === 1 || selectedMonth === 2 || selectedMonth === 3} />
+                </div>
+                {/* Close content wrapper */}
             </div>
+            {/* Close main card */}
 
             {/* --- Modals (Global Overlays) --- */}
             {showPopup && (

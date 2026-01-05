@@ -16,7 +16,8 @@ const CalendarGrid = ({
     year,
     month,
     matches,
-    onDateClick
+    onDateClick,
+    hasBackgroundImage = false
 }) => {
     const { isLightTheme } = useTheme();
     const daysInMonth = getDaysInMonth(year, month);
@@ -36,7 +37,12 @@ const CalendarGrid = ({
             blanks.push(
                 <div
                     key={`blank-${i}`}
-                    className={`min-h-[60px] md:min-h-[120px] rounded-lg transition-colors ${isLightTheme ? 'bg-slate-100' : 'bg-slate-900/30'}`}
+                    className={`min-h-[60px] md:min-h-[120px] rounded-lg transition-colors ${hasBackgroundImage && isLightTheme
+                        ? 'bg-white/10'
+                        : isLightTheme
+                            ? 'bg-slate-100'
+                            : 'bg-slate-900/30'
+                        }`}
                 />
             );
         }
@@ -59,6 +65,7 @@ const CalendarGrid = ({
                     year={year}
                     matches={dayMatches}
                     onClick={onDateClick}
+                    hasBackgroundImage={hasBackgroundImage}
                 />
             );
         }
@@ -75,10 +82,14 @@ const CalendarGrid = ({
                         className={`
                             py-2 md:py-3 text-center font-bold text-[10px] md:text-sm rounded-lg transition-all
                             ${index === 0 || index === 6
-                                ? 'text-amber-500 bg-amber-500/10'
-                                : isLightTheme
-                                    ? 'text-slate-600 bg-slate-100'
-                                    : 'text-slate-300 bg-slate-800/50'
+                                ? (hasBackgroundImage && isLightTheme)
+                                    ? 'text-amber-300 bg-amber-500/20'
+                                    : 'text-amber-500 bg-amber-500/10'
+                                : (hasBackgroundImage && isLightTheme)
+                                    ? 'text-white bg-white/10'
+                                    : isLightTheme
+                                        ? 'text-slate-600 bg-slate-100'
+                                        : 'text-slate-300 bg-slate-800/50'
                             }
                         `}
                     >

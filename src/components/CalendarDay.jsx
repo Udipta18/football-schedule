@@ -19,7 +19,8 @@ const CalendarDay = ({
     month,
     year,
     matches,
-    onClick
+    onClick,
+    hasBackgroundImage = false
 }) => {
     const { isFavorite } = useFavorites();
     const { isLightTheme } = useTheme();
@@ -35,14 +36,18 @@ const CalendarDay = ({
             onClick={() => onClick(day)}
             className={`
         relative p-1 md:p-3 min-h-[60px] md:min-h-[120px] cursor-pointer transition-all duration-300
-        glass rounded-lg border
+        backdrop-blur-sm rounded-lg border
         ${today
-                    ? 'border-blue-500 ring-2 ring-blue-500/30 bg-blue-500/10'
+                    ? 'border-blue-500 ring-2 ring-blue-500/30 bg-blue-500/5'
                     : hasFavoriteMatch
-                        ? 'border-amber-500/50 ring-1 ring-amber-500/20 bg-amber-500/10'
-                        : 'border-white/5 hover:border-white/20'
+                        ? 'border-amber-500/50 ring-1 ring-amber-500/20 bg-amber-500/5'
+                        : (hasBackgroundImage && isLightTheme)
+                            ? 'border-white/20 hover:border-white/40 bg-white/10'
+                            : isLightTheme
+                                ? 'border-slate-200/30 hover:border-slate-300/50 bg-white/20'
+                                : 'border-white/5 hover:border-white/20 bg-white/5'
                 }
-        hover:bg-white/5 hover:transform hover:scale-[1.02]
+        hover:bg-white/10 hover:transform hover:scale-[1.02]
         group
       `}
         >
@@ -51,7 +56,7 @@ const CalendarDay = ({
         font-bold text-sm md:text-lg mb-1 md:mb-2 flex items-center justify-between
         ${today ? 'text-blue-500' : hasFavoriteMatch ? 'text-amber-500' : 'text-slate-200'}
       `}>
-                <span className={isLightTheme ? 'text-slate-700' : 'text-white'}>{day}</span>
+                <span className={(hasBackgroundImage && isLightTheme) ? 'text-white' : (isLightTheme ? 'text-slate-700' : 'text-white')}>{day}</span>
 
                 <div className="flex items-center gap-1">
                     {/* Status Badges: Hidden on mobile to keep the number clear */}

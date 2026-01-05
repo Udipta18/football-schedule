@@ -11,9 +11,13 @@ import { useTheme } from '../context/ThemeContext';
  * - Trophies: Sized smaller (32px) on mobile and larger (48px) on desktop.
  * - Layout: Flexbox used to center the title on desktop while keeping actions right-aligned.
  */
-const Header = () => {
+const Header = ({ hasBackgroundImage = false }) => {
     // Access global theme state and toggle function
     const { isLightTheme, toggleTheme } = useTheme();
+
+    // Determine text color based on theme and background
+    const textColor = (isLightTheme && hasBackgroundImage) ? 'text-white' : (isLightTheme ? 'text-slate-800' : 'text-white');
+    const subtitleColor = (isLightTheme && hasBackgroundImage) ? 'text-slate-200' : (isLightTheme ? 'text-slate-600' : 'text-slate-400');
 
     return (
         <header className="mb-8">
@@ -36,7 +40,7 @@ const Header = () => {
                     <h1 className="text-2xl md:text-4xl font-extrabold flex flex-col md:flex-row md:items-center">
                         <span className="gradient-text">Football</span>
                         {/* margin-left added only on desktop (md:ml-2) when displayed horizontally */}
-                        <span className={`md:ml-2 ${isLightTheme ? 'text-slate-800' : 'text-white'}`}>Schedule</span>
+                        <span className={`md:ml-2 ${textColor}`}>Schedule</span>
                     </h1>
 
                     {/* Secondary Desktop Trophy: Only visible on Large screens (lg:) for extra balance */}
@@ -65,7 +69,7 @@ const Header = () => {
             </div>
 
             {/* Sub-headline: Responsive text size (text-sm to text-lg) */}
-            <p className={`${isLightTheme ? 'text-slate-600' : 'text-slate-400'} text-sm md:text-lg max-w-2xl mx-auto text-center font-medium opacity-90`}>
+            <p className={`${subtitleColor} text-sm md:text-lg max-w-2xl mx-auto text-center font-medium opacity-90`}>
                 Track live matches and schedules from Premier League, La Liga, Champions League, and more
             </p>
         </header>
